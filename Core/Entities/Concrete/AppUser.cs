@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Core.Entities.Concrete
 {
-    public class AppUser : IdentityUser<Guid>
+    public class AppUser : IdentityUser<string>
     {
     }  
 }

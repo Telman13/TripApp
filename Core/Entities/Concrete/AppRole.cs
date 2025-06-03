@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Core.Entities.Concrete
 {
-    public class AppRole : IdentityRole<Guid>
+    public class AppRole : IdentityRole<string>
     {
     }
 }

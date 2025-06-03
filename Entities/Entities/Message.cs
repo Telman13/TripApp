@@ -11,11 +11,10 @@ namespace Entities.Entities
     public class Message : BaseEntity
     {
         public string Description { get; set; }
-        public MessageStatus Status { get; set; } = MessageStatus.Pending;
-        public Guid SenderId { get; set; }
-        public User Sender { get; set; }
-        public Guid ReceiverId { get; set; }
-        public User Receiver { get; set; }
+        public string? SenderId { get; set; }
+        public User? Sender { get; set; }
+        public string? ReceiverId { get; set; }
+        public User? Receiver { get; set; }
         public Guid OrderId { get; set; }
         public Order Order { get; set; }
     }
