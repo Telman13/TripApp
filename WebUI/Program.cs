@@ -1,8 +1,9 @@
-using Business.DependecyResolver;
+using Business.DependecyResolver.IoC;
 using DataAccess.Concrete.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
 builder.Services.AddBusinessService();
 // Add services to the container.
 builder.Services
@@ -13,18 +14,6 @@ builder.Services
         options.JsonSerializerOptions.WriteIndented = true;
     });
 
-var env = builder.Environment;
-
-builder.Configuration
-    .SetBasePath(env.ContentRootPath)
-    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-    .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: env.IsDevelopment() ? false : true,
-        reloadOnChange: true);
-
-builder.Services.AddDbContext<TripAppDbContext>(options =>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("LocalConnection"));
-});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

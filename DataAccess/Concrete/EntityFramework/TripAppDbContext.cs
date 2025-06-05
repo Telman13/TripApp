@@ -1,4 +1,5 @@
-﻿using Core.Entities.Concrete;
+﻿using Core.Configuration;
+using Core.Entities.Concrete;
 using Entities.Common;
 using Entities.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -13,9 +14,11 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class TripAppDbContext : IdentityDbContext<User, AppRole, string>
     {
-        public TripAppDbContext(DbContextOptions<TripAppDbContext> options) : base(options)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            optionsBuilder.UseSqlServer(DatabaseConfiguration.ConnectionString);
         }
+
         public DbSet<Order> Orders { get; set; }
         public DbSet<Message> Messages { get; set; }
 

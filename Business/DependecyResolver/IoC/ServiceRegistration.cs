@@ -1,4 +1,7 @@
-﻿using Core.Entities.Concrete;
+﻿using Business.Abstract;
+using Business.Concrete;
+using Core.Entities.Concrete;
+using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Entities;
 using Microsoft.AspNetCore.Identity;
@@ -9,13 +12,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Business.DependecyResolver
+namespace Business.DependecyResolver.IoC
 {
     public static class ServiceRegistration
     {
         public static void AddBusinessService(this IServiceCollection services)
         {
             services.AddScoped<TripAppDbContext>();
+
+            services.AddScoped<IOrderDal, EfOrderDal>();
+            services.AddScoped<IOrderService, OrderManager>();
 
             services.AddIdentity<User, AppRole>(options =>
             {

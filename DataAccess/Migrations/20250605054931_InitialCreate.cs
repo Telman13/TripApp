@@ -227,8 +227,8 @@ namespace DataAccess.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "18FF4584-E530-4CFE-ADC1-9485EBCC1982", "13655cef-5e19-4b7e-bb6b-aa14ffa3c0d8", "Admin", "ADMIN" },
-                    { "A6975C7C-5397-4BBB-B450-2790781BCBAB", "36f9d086-3d65-47e9-8af0-44d9bb1948f2", "Customer", "CUSTOMER" }
+                    { "18FF4584-E530-4CFE-ADC1-9485EBCC1982", "5b88ce76-3fc0-4168-b5ae-d9ac098ea612", "Admin", "ADMIN" },
+                    { "A6975C7C-5397-4BBB-B450-2790781BCBAB", "7658626f-c4a5-4b85-b2d0-43e61a14a2e2", "Customer", "CUSTOMER" }
                 });
 
             migrationBuilder.InsertData(
@@ -236,8 +236,8 @@ namespace DataAccess.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "43B64316-DE56-4300-AE86-C298AEA73C7B", 0, "e10970c1-63c7-448c-9b62-b0b159265ac4", "Admin@gmail.com", true, null, null, false, null, "ADMIN@GMAIL.COM", "ADMIN", "AQAAAAIAAYagAAAAEKILPje37byxZ7OjePt96/RhbT/EL6WkEg1ecPVLcfU/J3pS05eQej56gV1gFR/QMA==", null, true, "70f57c99-c912-4657-a26d-6a95fafbc830", false, "admin" },
-                    { "99D74F43-7E23-41BE-9F98-10C5D6130312", 0, "412576fd-64ad-48cf-8f6d-49d48f32e3d0", "Customer@gmail.com", true, null, null, false, null, "CUSTOMER@GMAIL.COM", "CUSTOMER", "AQAAAAIAAYagAAAAEFYW8srCGY77Th0agr1+LCWoH7tiEjGkF5ZQM55EmRHpFBqePHAquFz8qlksDrOFCQ==", null, true, "393669f1-287b-4d5b-a924-5e37b6632ea0", false, "customer" }
+                    { "43B64316-DE56-4300-AE86-C298AEA73C7B", 0, "9d682c49-d3d8-45a7-97a9-8707b197566a", "Admin@gmail.com", true, null, null, false, null, "ADMIN@GMAIL.COM", "ADMIN", "AQAAAAIAAYagAAAAEPMu+5VPE5oY1Tkf4YdDWz/L7CQ/D75ThKa2Ikl9TPDLQzceYoyLHOsMlus/U+BXQg==", null, true, "abd1a1ba-6882-47fe-8727-0a2c855cb30d", false, "admin" },
+                    { "99D74F43-7E23-41BE-9F98-10C5D6130312", 0, "f37d9baa-df57-4a12-b201-fad31a6d71fb", "Customer@gmail.com", true, null, null, false, null, "CUSTOMER@GMAIL.COM", "CUSTOMER", "AQAAAAIAAYagAAAAEK2vSLmsfM69CuOwWQogrTsiN7VTqfaC4P49Mvp1PEthonLN2bQEm3BmNlfaEwflXw==", null, true, "07c8633b-a550-43bf-b9a7-3ef8a39b0e7f", false, "customer" }
                 });
 
             migrationBuilder.InsertData(
