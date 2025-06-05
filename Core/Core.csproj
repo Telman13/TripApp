@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Utilities\Results\Concrete\ErrorResult\**" />
+    <EmbeddedResource Remove="Utilities\Results\Concrete\ErrorResult\**" />
+    <None Remove="Utilities\Results\Concrete\ErrorResult\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
@@ -15,9 +21,6 @@
 
   <ItemGroup>
     <Folder Include="DataAccess\EntityFramework\" />
-    <Folder Include="Utilities\Results\Abstract\" />
-    <Folder Include="Utilities\Results\Concrete\ErrorResult\" />
-    <Folder Include="Utilities\Results\Concrete\SuccessResult\" />
   </ItemGroup>
 
 </Project>

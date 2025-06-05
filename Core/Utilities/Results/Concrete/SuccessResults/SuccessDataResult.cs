@@ -1,0 +1,28 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Core.Utilities.Results.Concrete.SuccessResults
+{
+    public class SuccessDataResult<T> : DataResult<T>
+    {
+        public SuccessDataResult(T data, HttpStatusCode statusCode, string message) : base(data, true, statusCode, message)
+        {
+        }
+
+        public SuccessDataResult(T data, HttpStatusCode statusCode) : base(data, true, statusCode)
+        {
+        }
+
+        public SuccessDataResult(HttpStatusCode statusCode, string message) : base(default, true, statusCode, message)
+        {
+        }
+
+        public SuccessDataResult(HttpStatusCode statusCode) : base(default, true, statusCode)
+        {
+        }
+    }
+}
