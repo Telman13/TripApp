@@ -1,4 +1,5 @@
-﻿using Entities.Dtos.OrderDtos;
+﻿using Core.Utilities.Results.Abstract;
+using Entities.Dtos.OrderDtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,9 @@ namespace Business.Abstract
 {
     public interface IOrderService
     {
-        Task<List<OrderListDto>> GetAllAsync();
+        Task<IResult> CreateAsync(OrderCreateDto dto);
+        Task<IDataResult<List<OrderListDto>>> GetAllAsync();
+        Task<IResult> UpdateAsync(OrderUpdateDto dto);
+        Task<IResult> DeleteAsync(Guid id);
     }
 }
