@@ -42,12 +42,13 @@ namespace Business.Concrete
         }
 
 
-        public async Task<IDataResult<List<OrderListDto>>> GetAllAsync()
+        public async Task<IDataResult<IList<OrderListDto>>> GetAllAsync()
         {
             var orders = await _orderDal.GetAllAsync(
                 tracking: false,
                 include: q => q.Include(o => o.User)
-                               .Include(o => o.Messages));
+                               .Include(o => o.Messages)
+            );
 
             var dtoList = orders.Select(o => new OrderListDto
             {
@@ -59,14 +60,17 @@ namespace Business.Concrete
                 UserFullName = o.User != null ? $"{o.User.FirstName} {o.User.LastName}" : "N/A"
             }).ToList();
 
-            return new SuccessDataResult<List<OrderListDto>>(dtoList, HttpStatusCode.OK, "Sifarişlər uğurla gətirildi");
+            return new SuccessDataResult<IList<OrderListDto>>(dtoList, HttpStatusCode.OK, "Sifarişlər uğurla gətirildi");
         }
 
         public async Task<IResult> UpdateAsync(OrderUpdateDto dto)
         {
-            var order = await _orderDal.GetAsync(o => o.Id == dto.Id);
+            var order = await _orderDal.GetAsync(
+                predicate: o => o.Id == dto.Id,
+                tracking: true
+            );
 
-            if (order == null)
+            if (order is null)
                 return new ErrorResult(HttpStatusCode.NotFound, "Sifariş tapılmadı");
 
             order.FromCity = dto.FromCity;
@@ -80,13 +84,41 @@ namespace Business.Concrete
 
         public async Task<IResult> DeleteAsync(Guid id)
         {
-            var order = await _orderDal.GetAsync(o => o.Id == id);
+            var order = await _orderDal.GetAsync(
+                predicate: o => o.Id == id,
+                tracking: true
+            );
 
-            if (order == null)
+            if (order is null)
                 return new ErrorResult(HttpStatusCode.NotFound, "Sifariş tapılmadı");
 
             await _orderDal.DeleteAsync(order);
             return new SuccessResult(HttpStatusCode.OK, "Sifariş uğurla silindi");
+        }
+
+        public async Task<IDataResult<OrderListDto>> GetByIdAsync(Guid id)
+        {
+            var order = await _orderDal.GetAsync(
+                predicate: o => o.Id == id,
+                tracking: false,
+                include: q => q.Include(o => o.User)
+                               .Include(o => o.Messages)
+            );
+
+            if (order is null)
+                return new ErrorDataResult<OrderListDto>(HttpStatusCode.NotFound, "Sifariş tapılmadı");
+
+            var dto = new OrderListDto
+            {
+                Id = order.Id,
+                FromCity = order.FromCity,
+                ToCity = order.ToCity,
+                TripDate = order.TripDate,
+                Description = order.Description,
+                UserFullName = order.User != null ? $"{order.User.FirstName} {order.User.LastName}" : "N/A"
+            };
+
+            return new SuccessDataResult<OrderListDto>(dto, HttpStatusCode.OK, "Sifariş uğurla gətirildi");
         }
     }
 }

@@ -23,6 +23,9 @@ namespace Business.DependecyResolver.IoC
             services.AddScoped<IOrderDal, EfOrderDal>();
             services.AddScoped<IOrderService, OrderManager>();
 
+            services.AddScoped<IMessageDal, EfMessageDal>();
+            services.AddScoped<IMessageService, MessageManager>();
+
             services.AddIdentity<User, AppRole>(options =>
             {
                 options.Password.RequiredLength = 8;

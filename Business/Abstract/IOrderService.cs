@@ -11,8 +11,9 @@ namespace Business.Abstract
     public interface IOrderService
     {
         Task<IResult> CreateAsync(OrderCreateDto dto);
-        Task<IDataResult<List<OrderListDto>>> GetAllAsync();
+        Task<IDataResult<IList<OrderListDto>>> GetAllAsync();
         Task<IResult> UpdateAsync(OrderUpdateDto dto);
         Task<IResult> DeleteAsync(Guid id);
+        Task<IDataResult<OrderListDto>> GetByIdAsync(Guid id);
     }
 }
