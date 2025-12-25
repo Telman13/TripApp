@@ -20,10 +20,6 @@ namespace Business.DependecyResolver.IoC
         {
             services.AddScoped<TripAppDbContext>();
 
-            services.AddIdentity<AppUser, AppRole>()
-               .AddEntityFrameworkStores<TripAppDbContext>()
-               .AddDefaultTokenProviders();
-
             services.AddScoped<IOrderDal, EfOrderDal>();
             services.AddScoped<IOrderService, OrderManager>();
 

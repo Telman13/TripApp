@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace Business.Concrete
 {
-    public class AuthManager(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager) : IAuthService
+    public class AuthManager(UserManager<User> userManager, SignInManager<User> signInManager) : IAuthService
     {
         public async Task<IResult> LoginAsync(LoginDto model)
         {
