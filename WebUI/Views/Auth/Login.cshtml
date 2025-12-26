@@ -1,0 +1,182 @@
+﻿@model Entities.Dtos.AuthDtos.LoginDto
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <link rel="stylesheet" href="sweetalert2.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+</head>
+<body>
+    <form method="post" asp-action="Login" autocomplete="off">
+        <div class="h-screen w-full flex flex-col justify-center items-center bg-[#1f293a]">
+            <div class="bg-[#1f293a] max-w-[600px] rounded-lg p-10">
+
+                <div class="text-[#fff] text-3xl tracking-widest font-semibold">TRIPIEX</div>
+                <div class="text-[#fff] text-xl mt-4">Hello! let's get started</div>
+                <div class="text-[#fff] mt-2">Sign in to continue.</div>
+                <div asp-validation-summary="ModelOnly" class="text-danger mt-3"></div>
+                <div class="relative my-7 input-box flex">
+                    <input asp-for="Email" class="h-[50px] text-white text-base outline-none border-1 border-[#2c4766] caret-white bg-transparent rounded-xl w-full px-4 rounded-xl focus:border-[#0ef]" type="text" />
+                    <label asp-for="Email" class="text-base absolute left-5 -translate-y-1/2 pointer-events-none">Email</label>
+                    <span asp-validation-for="Email" class="text-danger absolute left-[420px] top-3 w-[300px]"></span>
+                </div>
+                <div class="relative my-7 input-box flex">
+                    <input asp-for="Password" class="h-[50px] text-base text-white outline-none border-1 border-[#2c4766] caret-white bg-transparent rounded-xl w-full px-4 rounded-xl focus:border-[#0ef]" type="password" />
+                    <label asp-for="Password" class="text-base absolute left-5 -translate-y-1/2 pointer-events-none">Password</label>
+                    <span asp-validation-for="Password" class="text-danger absolute left-[420px] top-3 w-[300px]"></span>
+                </div>
+                <div class="w-[400px] mb-7">
+                    <input class="text-[#f4f4f4] bg-[#0ef] flex justify-center items-center w-full p-2 tracking-wide rounded-xl cursor-pointer hover:opacity-75 delay-100" type="submit" value="SIGN IN" />
+                </div>
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="myCheckbox" name="keep me" class="hidden" />
+                        <label for="myCheckbox" class="custom-checkbox"></label>
+                        <div class="ml-3 text-[#fff] text-sm">Remember me</div>
+                    </div>
+                    <div class="text-white text-sm cursor-pointer hover:underline">Forgot password?</div>
+                </div>
+                <div class="flex items-center justify-center mt-4">
+                    <div class="text-white">Don't have an account? </div>
+                    <div onclick="window.location.href='@Url.Action("Register", "Auth")'" class="transition duration-200 ml-1 text-[#0ef] cursor-pointer hover:opacity-75 delay-100 hover:underline">Create</div>
+                </div>
+            </div>
+        </div>
+    </form>
+    @if (ViewBag.ErrorMessageFromLogin is not null)
+    {
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: '@ViewBag.ErrorMessageFromLogin',
+                    timer: 5000,
+                    showConfirmButton: true
+                });
+            });
+            Toastify({
+                text: "@ViewBag.ErrorMessageFromLogin",
+                duration: 3000,
+                destination: "https://github.com/apvarun/toastify-js",
+                newWindow: true,
+                close: true,
+                gravity: "bottom",
+                position: "right",
+                stopOnFocus: true,
+                style: {
+                    background: "red",
+                },
+                onClick: function () { }
+            }).showToast();
+        </script>
+    }
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <partial name="_ValidationScriptsPartial" />
+</body>
+</html>
+<style>
+     input[type="checkbox"] {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            width: 0;
+            height: 0;
+            overflow: hidden;
+            position: absolute;
+        } 
+    .custom-checkbox {
+        width: 15px;
+        height: 16px;
+        border: 2px solid #0ef;
+        border-radius: 3px;
+        position: relative;
+        cursor: pointer;
+    }
+
+        .custom-checkbox::after {
+            content: "";
+            width: 6px;
+            height: 12px;
+            border: solid #000;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -7px;
+            margin-left: -4px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+    input[type="checkbox"]:checked + .custom-checkbox::after {
+        opacity: 1;
+    }
+
+    input[type="checkbox"]:checked + .custom-checkbox {
+        background-color: #0ef;
+    }
+
+    label {
+        transition: .5s ease;
+    }
+
+    .input-box input:not(:placeholder-shown) + label {
+        top: 1px;
+        font-size: .8em;
+        background: #1f293a;
+        padding: 0 6px;
+        color: #fff;
+    }
+
+    .input-box input:not(:focus) + label {
+        background: transparent;
+        top: 50%;
+    }
+</style>
+<script>
+    const inputs = document.querySelectorAll('.input-box input');
+    inputs.forEach(input => {
+        input.addEventListener('input', () => {
+            const label = input.nextElementSibling;
+            if (input.value !== '') {
+                label.style.top = '1px';
+                label.style.fontSize = '.8em';
+                label.style.background = '#1f293a';
+                label.style.padding = '0 6px';
+                label.style.color = '#0ef';
+            }
+        });
+        input.addEventListener('focus', () => {
+            const label = input.nextElementSibling;
+            label.style.top = '1px';
+            label.style.fontSize = '.8em';
+            label.style.background = '#1f293a';
+            label.style.padding = '0 6px';
+            label.style.color = '#0ef';
+        });
+        input.addEventListener('blur', () => {
+            const label = input.nextElementSibling;
+            if (input.value === '') {
+                label.style.top = '50%';
+                label.style.background = 'transparent'
+                label.style.color = '#fff';
+            }
+        });
+    });
+</script>
