@@ -14,6 +14,16 @@ builder.Services
         options.JsonSerializerOptions.WriteIndented = true;
     });
 
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Auth/Login";
+    options.AccessDeniedPath = "/Auth/Login";
+    options.Cookie.HttpOnly = true;
+    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+    options.SlidingExpiration = true;
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
